@@ -1,0 +1,1 @@
+{"rustc":5475348352969617417,"features":"[]","target":2675404306140248954,"profile":18108590124580271077,"path":1036222786711178230,"deps":[[13779529693008951436,"p2p_app",false,8505848735959962262]],"local":[{"CheckDepInfo":{"dep_info":"debug/.fingerprint/p2p_app-fb56cb472be457db/dep-bin-p2p_app"}}],"rustflags":[],"metadata":17722012217876241689,"config":0,"compile_kind":0}
