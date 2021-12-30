@@ -34,36 +34,43 @@ pub fn get_config ( args: Arguments ) -> Result<Config, &str> {
 	};
 	let conf_reader = BufReader::new( conf_file ).bytes();
 
-	let mut ret = Config{}
+	let mut host_list: Vec<Host> = Vec::new();
+	while reader {
 
-}
-
-fn absorb_addr ( it:  ) -> ( String, Vec<( String, isize )> ) {
-	let hname = absorb_string( it );
-	if it.next() == '{' {
-		let files: Vec<files> =
-		while absorb_file( it )
-		( hname, files )
-	} else {
-		panic!( "config syntax error: no bracket" );
 	}
 }
 
-fn absorb_file ( it ) -> Result<( {
-	if it.next() == '\'' {
-		let fname = absorb_string( it );
-		if it.next() == '\'' && it.next() == ':' {
-			let fperms = absorb_int( it );
-			if it.next() != ',' {
-				return ( fname, fperms )
-			} else {
-				panic!( "config syntax error: no comma" );
-			}
+fn is_whitesp ( char c ) -> bool {
+	return c == ' ' || c == '\t' || c == '\n' || c == '\r';
+}
+
+fn absorb_string ( reader: BufReader, delm: char ) -> Result<&str, &str> {
+	let mut s: String = String::new();
+	let mut c: Option<char> = reader.next();
+	if delm == 0 {
+		while c != None && !is_whitesp( c.unwrap() ) {
+			s.push( c );
+			c = reader.next();
+		}
+		if c.is_some() {
+			return Ok( s.as_str() )
 		} else {
-			panic!( "config syntax error: no colon/string not terminated" ).
+			return Err( "File ended before we could read string" );
 		}
 	} else {
-		return None
+		if c != Some( delm ) {
+			return Err( "Expected a delimiter at the start of a string." );
+		}
+		c = reader.next();
+		while c != None && c.unwrap() != delim {
+			s.push( c );
+			c = reader.next();
+		}
+		if c == Some( delim ) {
+			return Ok( s.as_str() )
+		} else {
+			return Err( "File ended before we could read string" )
+		}
 	}
 }
 
@@ -83,7 +90,7 @@ pub struct SharedFile {
 	// fp?
 }
 
-pub struct Hosts {
+pub struct Host {
 	pub name: String,
 	pub files: Vec<SharedFile>
 	// extra stuff? like methods, callbacks, etc
