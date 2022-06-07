@@ -1,0 +1,9 @@
+prefix=/home/the_banana/Documents/Git/syncy-thing/network_layer/target/debug/build/openssl-sys-50ed16380f13c761/out/openssl-build/install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenSSL
+Description: Secure Sockets Layer and cryptography libraries and tools
+Version: 1.1.1m
+Requires: libssl libcrypto
