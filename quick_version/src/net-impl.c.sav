@@ -1,61 +1,68 @@
 
 #include "net.h"
-
-#define LISTEN_PORT 666
-#define BACKLOG 1
+#include "net-impl.h"
 
 typedef struct {
 	const char* name;
-	int buffer_len
+	int buffer_len;
 } sync_node;
 
 typedef struct {
 	char* hostname;
 	int hostlen;
-	struct sockaddr_in addr;
+	struct sockaddr_in6 addr;
 	int comm_sock;
 	pthread_t thread;
 } sync_peer;
 
 typedef struct {
-	short listen_port;		// port to listen on
 	sync_node** node_list;	// known nodes
 	sync_peer** peer_list;	// known peers
 	int node_len;
 	int peer_len;
-	int buffer_len;			// how long comm buff should be (longer buffers are more efficient for bigger files, but not smaller ones)
 	char** map;				// if file i is shared with client j, we put a 1 in the map, else put a 0. We can also include other flags here.
 } config;
+
+typedef struct {
+	sockaddr* bind_addr;	// addr we bind to
+	short listen_port;		// port to listen on
+	int buffer_len;			// how long comm buff should be (longer buffers are more efficient for bigger files, but not smaller ones)
+} net_config;
 
 typedef struct {
 	config* conf;
 	sync_peer* peer;
 } pfn_args;
 
-// int connect_to_peer ( sync_peer* peer ) {
-// 	if ( conn_socket != 0 )
-// 		return 0;
-// 	else {
-//
-// 	}
-// }
+int connect_to_peer ( sync_peer* peer ) {
+	int peer_addr_size = sizeof( peer->addr );
+	int conn_sock = socket( AF_INET6, SOCK_STREAM, 0 );
+
+
+}
 
 int listen_for_peers ( config* conf ) {
-	int listen_sock = socket( AF_INET, SOCK_STREAM, 0 );
+	int listen_sock = socket( AF_INET6, SOCK_STREAM, 0 );
 	int accept_sock = -1;
-	struct sockaddr_in this_addr;
-	struct sockaddr_in peer_addr;
+	struct addrinfo hints;
+	struct addrinfo* results;
+	struct addrinfo* index;
+	struct sockaddr_in6 peer_addr;
 	int peer_addr_size = sizeof( peer_addr );
 
 // 	Standard procedure for starting a socket server
 	if ( listen_sock == -1 ) ERR_QUIT( "Socket creation failed" );
 
-	this_addr.sin_port = htons( conf->listen_port );
-	this_addr.sin_family = AF_INET;
-	this_addr.sin_addr.s_addr = 0;
+	hints.ai_family = AF_UNSPEC;
+	hints.ai_
+
+	if ( ( ecode = getaddrinfo( node, service, &hints, &result ) ) != 0 )
+		ERR_QUIT( "Error msg: %s", gai_strerror( ecode ) );
 
 	if ( bind( listen_sock, (struct sockaddr*)&this_addr, sizeof( this_addr ) ) != 0 )
 		ERR_QUIT( "Binding socket to addr failed (is port %i reserved?)", conf->listen_port );
+
+	freeaddrinfo( results );
 
 	if ( listen( listen_sock, BACKLOG ) != 0 )
 		ERR_QUIT( "Setting socket to listen failed" );
@@ -68,7 +75,7 @@ int listen_for_peers ( config* conf ) {
 		LOG( "Got a connection" );
 		sync_peer* this_peer = 0;
 		for ( int i = 0; i < conf->peer_len; i++ ) {
-			if ( peer_addr.sin_addr.s_addr == conf->peer_list[ i ]->addr.sin_addr.s_addr ) {
+			if ( peer_addr.sin_addr.s_addr == conf->peer_list[ i ]->addr.sin6_addr.s_addr ) {
 				this_peer = conf->peer_list[ i ];
 				LOG( "Connection confirmed to be the address of peer %s", conf->peer_list[ i ]->hostname );
 				break;

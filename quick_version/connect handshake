@@ -1,0 +1,35 @@
+Basic Handshake:
+	- the network is formed by one peer.
+	- when a peer wants to join the network, it tries to connect to its known peers in whatever order (doesn't matter).
+		- if this fails, the peer assumes it's alone and will start to accept connections.
+		- if it succeeds, the peer simply waits for other available peers to connect to it.
+			- ofc the peer connected to by our peer will let the other online peers know of the new peer's existence
+			- this also serves to let the new peer know who's online.
+	- the handshake protocol:
+		- connecting peer: sends hostname (for now)
+		- connected peer: checks if hostname is in dict
+			- and then if its successful, sends its own hostname, else just disconnect
+		- connecting peer: if sent hostname checks out, then it will send a sync request, this includes it's files.
+
+File Sharing:
+	- update: send a file to be updated, along with a list of hosts already covered (a tree?)
+		- the idea here is that we can just share the file with all of the hosts
+		- if a folder is shared, we need a list of revised files.
+	- share: share an original file (or folder) with all or a subset of the network.
+		- if a subset, there has to be a list of the hosts.
+	- update_packet: after an update/share command, this signifies that it's continuing for the
+		last command. I might introduce individual command IDs so that an update_packet command
+		will be associated with the right file
+	- delete: entirely erase a file for peers.
+	- add_peer: give a peer access to a file/folder.
+	- remove_peer: revoke access from a peer.
+	- kick_peer: remove a peer from existence. It has to be added back manually.
+		- also, send delete requests for every single file it had access to
+			- of course a dishonest client could just ignore these requests
+		- this is more of a 'security measure'
+
+Extras:
+	- ban_peer: put the peer on a 'ban_list'
+
+Common Fns:
+	- Nodes have to call getaddrinfo to get addresses to bind to, and they have to call getaddrinfo on each client hostname and verify the address with the expected one. Thus, would be prudent to have a getaddrinfo fn that takes a callback so you can do something with the new addr.
