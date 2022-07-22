@@ -5,7 +5,8 @@
 #define __MAIN_HEAD
 
 #include "root.h"
+#include "arg-parser.h"
 
-int set_config( char* supplied[ DEFSIZE ] );
+int set_config( const char** supplied );
 
 #endif

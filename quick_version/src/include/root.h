@@ -22,7 +22,7 @@
 
 #define ERR( fmt, ... ) ({											\
 	char* estr = strerror( errno );									\
-	fprintf( stderr, "FATAL ERROR (file %s, line %i): " 			\
+	fprintf( stderr, "ERROR (file %s, line %i): " 					\
 			fmt ": %s\n", __FILE__, __LINE__, 						\
 			##__VA_ARGS__, estr );									\
 })

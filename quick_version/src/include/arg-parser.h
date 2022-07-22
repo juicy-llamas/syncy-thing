@@ -4,17 +4,11 @@
 #define __PARSER_HEAD
 
 // This is a list of all of the arguments that could be given to the program.
-const char* OPTIONS[] = {
-	"-c",
-	"--config"
-};
-#define OPTSIZE ( sizeof( OPTIONS ) / sizeof( *OPTIONS ) )
-
+extern const char* OPTIONS[];
+extern const int OPTSIZE;
 // These are the default values for those arguments.
-const char* DEFAULTS[] = {
-	"./config"
-};
-#define DEFSIZE ( sizeof( DEFAULTS ) / sizeof( *DEFAULTS ) )
+extern const char* DEFAULTS[];
+extern const int DEFSIZE;
 
 // A macro to help eliminate redundancy w/ the code in argument setting (making a fn take a *i seemed kinda weird, plus return wouldn't work).
 #define TAKE_ARG( in, msg ) ({					\

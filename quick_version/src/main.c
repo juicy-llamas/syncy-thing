@@ -1,10 +1,9 @@
 
 #include "main.h"
-#include "arg-parser.h"
 
 int main ( int argc, char** argv ) {
 // 	We can only supply as many arguments as we have default values.
-	char* supplied[ DEFSIZE ];
+	const char* supplied[ DEFSIZE ];
 
 // 	Set defaults
 	for ( int i = 0; i < DEFSIZE; i++ )
@@ -27,14 +26,14 @@ int main ( int argc, char** argv ) {
 					TAKE_ARG( 0, "-c [config file] OR --config [config file]" );
 					break;
 				default:
-					fprintf( stderr, "Invalid arguments.\nType --help for more details.\n" );
+					fprintf( stderr, "invalid arguments.\ntype --help for more details.\n" );
 					return 2;
 			}
 		}
 	}
 
 	for ( int i = 0; i < DEFSIZE; i++ )
-		DBGLOG( "Argument %i", i, supplied[ i ] );
+		DBGLOG( "argument %i: %s", i, supplied[ i ] );
 
 	set_config( supplied );
 

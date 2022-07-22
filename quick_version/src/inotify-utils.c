@@ -14,6 +14,8 @@ int init () {
 	IFILE_INST = inotify_init();
 }
 
+int watcher (
+
 int main () {
 
 }

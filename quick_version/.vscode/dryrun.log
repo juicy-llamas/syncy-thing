@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/the_banana/Documents/Git/syncy-thing/quick_version'
+make: Leaving directory '/home/the_banana/Documents/Git/syncy-thing/quick_version'
+ 
+make: *** No rule to make target 'build/net_one.o', needed by 'testnet'.
+

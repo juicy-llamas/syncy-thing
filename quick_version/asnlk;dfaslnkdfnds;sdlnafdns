@@ -1,0 +1,13 @@
+Peers
+	- shared files
+		- permissions?
+	- communication sockets
+	- addr / hostname
+	- thread / process
+
+files
+	- inotify watchers
+	- name / size of file
+
+
+
