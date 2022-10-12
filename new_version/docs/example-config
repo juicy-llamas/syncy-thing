@@ -1,0 +1,48 @@
+#config file
+# white space == separator
+# # is a comment
+
+# HOSTS
+.hosts
+# just hname
+host-identifier		the-furry-cartel
+# ipv4 + hname
+host-one			192.168.86.32		hostname
+# ipv6 + hname
+host-two			::					hostname
+# identifier is optional
+_ :: hostname	# this is valid, _ just means no identifier
+
+# FILES
+.files
+# file or dir path
+~/Documents/Git
+# after path, arrows point to hosts that can access file
+	=> host-one	rw
+# you can also use hostname
+	=> host-one	rw
+~/Downloads
+# ALL is a special keyword,
+	=> ALL		ALL
+
+# you can specify more hosts if you use .hosts again
+.hosts
+host-three			3.3.3.3				three
+
+# likewise with files
+.files
+/		# not recommended heh.
+	=>	ALL		ALL
+# To *escape* a #, you can do \#
+~/this/is/path/file-name-with-a-\#
+
+# auto reject certain addresses
+.blacklist
+666.0.0.0		# no satanists here
+333.*.*.*		# you can also use masks, * is wildcard
+233.<23.*.*		# 233.something that's less than 23.wildcard.wildcard
+223.>223.*.*	# s
+
+# local area networks that are  a p p r o v e d  to start the program on (so program doesn't try to sync when you're on public wifi)
+.lan-list
+# will work on this soon
