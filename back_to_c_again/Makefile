@@ -1,39 +1,66 @@
 
+.PHONY: test clean
+
 # are we debugging
 DEBUG=true
 
 BDIR=build
 SDIR=src
-IDIR=./src/include
+IDIR=src/include
 TDIR=src/tests
-# file with main
+# entry is the file with main, which is NOT linked with the tests
 ENTRY=main
+APPNAME=app
 
-# assume that every source file is tested, EXCEPT for main b.c. multiple entry point issue
-TEST_O=$(shell for i in $$(find src -maxdepth 1 -type f); do tmp=$${i#src/}; fl=$${tmp%.c};\
-	[ $$fl = "$(ENTRY)" ] && continue; echo "build/$$fl.o"; done;)
-# add main back in. Theoretically, with some changes, you could have multiple targets that use different objects.
-APP_O=$(TEST_O) build/$(ENTRY).o
-
+# you can set your various flags here
 base_flags=-c -Wall -Wextra -I$(IDIR)
 base_lflags=-fstack-protector-strong -lcrypto -lssl -lpthread
+
+debug_flags=-g -D'DEBUG'
+debug_lflags=-g
+
+build_flags=-fPIE -O3
+build_lflags=-Wl,-z,noexecstack -pie -fPIE
+
+# ==============================================
+# This is where all of the actual make rules are
+# ==============================================
+
+# assume that every source file is tested, EXCEPT for main b.c. multiple entry point issue
+TEST_O=$(shell for i in $$(find $(SDIR) ! -path "*$(IDIR)*" ! -path "*$(TDIR)*" -type f); \
+	do tmp=$${i#$(SDIR)/}; fl=$${tmp%.c}; [ $$fl = "$(ENTRY)" ] && continue; echo "$(BDIR)/$$fl.o"; done;)
+# add main back in. Theoretically, with some changes, you could have multiple targets that use different objects.
+APP_O=$(TEST_O) $(BDIR)/$(ENTRY).o
+
 ifeq '$(DEBUG)' 'true'
-	CFLAGS=-g $(base_flags)
-	LFLAGS=-g $(base_lflags)
+	CFLAGS=$(debug_flags) $(base_flags)
+	LFLAGS=$(debug_lflags) $(base_lflags)
 else
-	CFLAGS=-fPIE -O3 $(base_flags)
-	LFLAGS=-Wl,-z,noexecstack -pie -fPIE $(base_lflags)
+	CFLAGS=$(build_flags) $(base_flags)
+	LFLAGS=$(build_lflags) $(base_lflags)
 endif
 
-app: $(APP_O)
+$(APPNAME): $(APP_O)
 	$(CC) $^ -o $@ $(LFLAGS)
+
+$(BDIR)/%.o: $(SDIR)/%.c
+	$(CC) $^ -o $@ $(CFLAGS)
+
+clean:
+	$(RM) $(BDIR)/*
+	$(RM) app
+	$(RM) test_log
+
+# ============================================
+# Just a neat little automated testing utility
+# ============================================
 
 test: $(TEST_O)
 	@num_t=0;										\
 	num_s=0;										\
 	echo "" >> test_log;									\
 	echo "" >> test_log;									\
- 	for i in $$(find $(TDIR) -maxdepth 1 -type f); do					\
+ 	for i in $$(find $(TDIR) ! -path "*skipped*" -type f); do				\
 		i=$${i#$(TDIR)/};								\
 		echo "========================================" | tee -a test_log;		\
 		echo "	test $$i" | tee -a test_log;						\
@@ -67,12 +94,3 @@ test: $(TEST_O)
 	fi;											\
 	echo "" >> test_log;									\
 	echo "" >> test_log;
-
-$(BDIR)/%.o: $(SDIR)/%.c
-	$(CC) $^ -o $@ $(CFLAGS)
-
-.PHONY: clean
-clean:
-	$(RM) $(BDIR)/*
-	$(RM) app
-	$(RM) test_log

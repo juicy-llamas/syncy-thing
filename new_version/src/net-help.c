@@ -4,18 +4,17 @@
 int TCP_PROT;
 
 int net_init () {
-	int ret = 0;
+	struct protoent* protn = getprotobyname( "TCP" );
 
-	struct protoent* str = getprotobyname( "TCP" );
-	if ( str )
-		TCP_PROT = str->p_proto;
+	if ( protn )
+		TCP_PROT = protn->p_proto;
 	else {
-		WARN( "getprotobyname failed, defaulting to 6.\n\tIf you know value for TCP, or want to use a different proto, specify NET_PROTO=x in config." );
+		WARN( "getprotobyname failed, defaulting to 6.\n\tIf you know the value for TCP, or want to use a different protocol, specify NET_PROTO=x in config." );
 		TCP_PROT = 6;
-		ret = 1;
+		return 1;
 	}
 
-	return ret;
+	return 0;
 }
 
 int hname ( const char* hostname,

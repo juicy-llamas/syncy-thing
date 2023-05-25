@@ -1,10 +1,162 @@
 
 
 ========================================
-	test skipped/i_am_a_test.c
+	test unit-net-help-tests.c
 ========================================
-Assembler messages:
-Fatal error: can't create build/skipped/i_am_a_test.o: No such file or directory
+src/tests/unit-net-help-tests.c:3:9: error: #include expects "FILENAME" or <FILENAME>
+    3 | #include
+      |         ^
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:17:53: error: ‘struct sockaddr’ has no member named ‘sin_family’; did you mean ‘sa_family’?
+   17 |                 printf( "\tsin_family: %i\n", addy->sin_family );
+      |                                                     ^~~~~~~~~~
+      |                                                     sa_family
+src/tests/unit-net-help-tests.c:18:72: error: ‘struct sockaddr’ has no member named ‘sin_port’
+   18 |                 printf( "\tsin_port (little endian): %i\n", htons( addy->sin_port ) );
+      |                                                                        ^~
+src/tests/unit-net-help-tests.c:19:68: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   19 |                 printf( "\tsin_addr: %i.%i.%i.%i\n", ((char*)&(addy->sin_addr.s_addr))[ 0 ],
+      |                                                                    ^~
+src/tests/unit-net-help-tests.c:20:98: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   20 |                                                                                    ((char*)&(addy->sin_addr.s_addr))[ 1 ],
+      |                                                                                                  ^~
+src/tests/unit-net-help-tests.c:21:98: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   21 |                                                                                    ((char*)&(addy->sin_addr.s_addr))[ 2 ],
+      |                                                                                                  ^~
+src/tests/unit-net-help-tests.c:22:98: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   22 |                                                                                    ((char*)&(addy->sin_addr.s_addr))[ 3 ] );
+      |                                                                                                  ^~
+src/tests/unit-net-help-tests.c:25:54: error: ‘struct sockaddr’ has no member named ‘sin6_family’; did you mean ‘sa_family’?
+   25 |                 printf( "\tsin6_family: %i\n", addy->sin6_family );
+      |                                                      ^~~~~~~~~~~
+      |                                                      sa_family
+src/tests/unit-net-help-tests.c:26:73: error: ‘struct sockaddr’ has no member named ‘sin6_port’
+   26 |                 printf( "\tsin6_port (little endian): %i\n", htons( addy->sin6_port ) );
+      |                                                                         ^~
+src/tests/unit-net-help-tests.c:27:61: error: ‘struct sockaddr’ has no member named ‘sin6_flowinfo’
+   27 |                 printf( "\tsin6_flowinfo: %i\n", htons( addy->sin6_flowinfo ) );
+      |                                                             ^~
+src/tests/unit-net-help-tests.c:29:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   29 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 0 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:30:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   30 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 1 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:31:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   31 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 2 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:32:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   32 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 3 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:33:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   33 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 4 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:34:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   34 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 5 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:35:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   35 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 6 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:36:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   36 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 7 ] );
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:37:61: error: ‘struct sockaddr’ has no member named ‘sin_scope_id’
+   37 |                 printf( "\tsin6_scope_id: %i\n", htons( addy->sin_scope_id ) );
+      |                                                             ^~
+src/tests/unit-net-help-tests.c:14:64: warning: unused parameter ‘oth’ [-Wunused-parameter]
+   14 | int hname_callback ( struct sockaddr* addy, int addylen, void* oth ) {
+      |                                                          ~~~~~~^~~
+src/tests/unit-net-help-tests.c: In function ‘get_ip_of’:
+src/tests/unit-net-help-tests.c:45:20: warning: initialization of ‘char’ from ‘void *’ makes integer from pointer without a cast [-Wint-conversion]
+   45 |         char out = malloc( 2048 );
+      |                    ^~~~~~
+src/tests/unit-net-help-tests.c:48:47: error: ‘ip_list’ undeclared (first use in this function)
+   48 |         struct ip_list* ret = malloc( sizeof( ip_list ) );
+      |                                               ^~~~~~~
+src/tests/unit-net-help-tests.c:48:47: note: each undeclared identifier is reported only once for each function it appears in
+src/tests/unit-net-help-tests.c:56:36: warning: passing argument 1 of ‘getline’ from incompatible pointer type [-Wincompatible-pointer-types]
+   56 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:645:45: note: expected ‘char ** restrict’ but argument is of type ‘char *’
+  645 | extern __ssize_t getline (char **__restrict __lineptr,
+      |                           ~~~~~~~~~~~~~~~~~~^~~~~~~~~
+src/tests/unit-net-help-tests.c:56:42: warning: passing argument 2 of ‘getline’ makes pointer from integer without a cast [-Wint-conversion]
+   56 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                          ^~~~
+      |                                          |
+      |                                          int
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:646:46: note: expected ‘size_t * restrict’ {aka ‘long unsigned int * restrict’} but argument is of type ‘int’
+  646 |                           size_t *__restrict __n,
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+src/tests/unit-net-help-tests.c:60:42: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   60 |                 if ( inet_pton( AF_INET, cmdout, addr ) == 1 ) {
+      |                                          ^~~~~~
+      |                                          |
+      |                                          FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:62:29: error: expected expression before ‘.’ token
+   62 |                         cur-.ip.ipv4 = addr[ 0 ];
+      |                             ^
+src/tests/unit-net-help-tests.c:63:50: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   63 |                 } else if ( inet_pton( AF_INET6, cmdout, addr ) == 1 ) {
+      |                                                  ^~~~~~
+      |                                                  |
+      |                                                  FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:68:25: warning: implicit declaration of function ‘warn’ [-Wimplicit-function-declaration]
+   68 |                         warn( "invalid addr: '%s'", cmdout );
+      |                         ^~~~
+src/tests/unit-net-help-tests.c:77:15: warning: passing argument 1 of ‘free’ makes pointer from integer without a cast [-Wint-conversion]
+   77 |         free( out );
+      |               ^~~
+      |               |
+      |               char
+In file included from ./src/include/root.h:23,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdlib.h:555:25: note: expected ‘void *’ but argument is of type ‘char’
+  555 | extern void free (void *__ptr) __THROW;
+      |                   ~~~~~~^~~~~
+src/tests/unit-net-help-tests.c: In function ‘main’:
+src/tests/unit-net-help-tests.c:85:17: error: expected expression before ‘struct’
+   85 |         while ( struct ip_list* =
+      |                 ^~~~~~
+src/tests/unit-net-help-tests.c:88:24: warning: missing terminating " character
+   88 |         assert( hname( "www.google.com
+      |                        ^
+src/tests/unit-net-help-tests.c:111:2: error: unterminated argument list invoking macro "assert"
+  111 | }
+      |  ^
+src/tests/unit-net-help-tests.c:85:9: note: ‘-Wmisleading-indentation’ is disabled from this point onwards, since column-tracking was disabled due to the size of the code/headers
+   85 |         while ( struct ip_list* =
+      |         ^~~~~
+src/tests/unit-net-help-tests.c:85:9: note: adding ‘-flarge-source-files’ will allow for more column-tracking support, at the expense of compilation time and memory
+src/tests/unit-net-help-tests.c:88:9: error: expected declaration or statement at end of input
+   88 |         assert( hname( "www.google.com
+      |         ^~~~~~
+src/tests/unit-net-help-tests.c:84:25: warning: unused variable ‘google’ [-Wunused-variable]
+   84 |         struct ip_list* google = get_ip_of( "www.google.com" );
+      |                         ^~~~~~
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:41:1: warning: control reaches end of non-void function [-Wreturn-type]
+   41 | }
+      | ^
 
 Compilation failed
 
@@ -17,6 +169,163 @@ Compilation failed
 
 
 ========================================
+	test unit-net-help-tests.c
+========================================
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:16:53: error: ‘struct sockaddr’ has no member named ‘sin_family’; did you mean ‘sa_family’?
+   16 |                 printf( "\tsin_family: %i\n", addy->sin_family );
+      |                                                     ^~~~~~~~~~
+      |                                                     sa_family
+src/tests/unit-net-help-tests.c:17:72: error: ‘struct sockaddr’ has no member named ‘sin_port’
+   17 |                 printf( "\tsin_port (little endian): %i\n", htons( addy->sin_port ) );
+      |                                                                        ^~
+src/tests/unit-net-help-tests.c:18:68: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   18 |                 printf( "\tsin_addr: %i.%i.%i.%i\n", ((char*)&(addy->sin_addr.s_addr))[ 0 ],
+      |                                                                    ^~
+src/tests/unit-net-help-tests.c:19:98: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   19 |                                                                                    ((char*)&(addy->sin_addr.s_addr))[ 1 ],
+      |                                                                                                  ^~
+src/tests/unit-net-help-tests.c:20:98: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   20 |                                                                                    ((char*)&(addy->sin_addr.s_addr))[ 2 ],
+      |                                                                                                  ^~
+src/tests/unit-net-help-tests.c:21:98: error: ‘struct sockaddr’ has no member named ‘sin_addr’
+   21 |                                                                                    ((char*)&(addy->sin_addr.s_addr))[ 3 ] );
+      |                                                                                                  ^~
+src/tests/unit-net-help-tests.c:24:54: error: ‘struct sockaddr’ has no member named ‘sin6_family’; did you mean ‘sa_family’?
+   24 |                 printf( "\tsin6_family: %i\n", addy->sin6_family );
+      |                                                      ^~~~~~~~~~~
+      |                                                      sa_family
+src/tests/unit-net-help-tests.c:25:73: error: ‘struct sockaddr’ has no member named ‘sin6_port’
+   25 |                 printf( "\tsin6_port (little endian): %i\n", htons( addy->sin6_port ) );
+      |                                                                         ^~
+src/tests/unit-net-help-tests.c:26:61: error: ‘struct sockaddr’ has no member named ‘sin6_flowinfo’
+   26 |                 printf( "\tsin6_flowinfo: %i\n", htons( addy->sin6_flowinfo ) );
+      |                                                             ^~
+src/tests/unit-net-help-tests.c:28:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   28 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 0 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:29:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   29 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 1 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:30:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   30 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 2 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:31:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   31 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 3 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:32:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   32 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 4 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:33:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   33 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 5 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:34:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   34 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 6 ],
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:35:99: error: ‘struct sockaddr’ has no member named ‘sin6_addr’
+   35 |                                                                                    ((short*)&(addy->sin6_addr.s6_addr))[ 7 ] );
+      |                                                                                                   ^~
+src/tests/unit-net-help-tests.c:36:61: error: ‘struct sockaddr’ has no member named ‘sin_scope_id’
+   36 |                 printf( "\tsin6_scope_id: %i\n", htons( addy->sin_scope_id ) );
+      |                                                             ^~
+src/tests/unit-net-help-tests.c:13:64: warning: unused parameter ‘oth’ [-Wunused-parameter]
+   13 | int hname_callback ( struct sockaddr* addy, int addylen, void* oth ) {
+      |                                                          ~~~~~~^~~
+src/tests/unit-net-help-tests.c: In function ‘get_ip_of’:
+src/tests/unit-net-help-tests.c:44:20: warning: initialization of ‘char’ from ‘void *’ makes integer from pointer without a cast [-Wint-conversion]
+   44 |         char out = malloc( 2048 );
+      |                    ^~~~~~
+src/tests/unit-net-help-tests.c:47:47: error: ‘ip_list’ undeclared (first use in this function)
+   47 |         struct ip_list* ret = malloc( sizeof( ip_list ) );
+      |                                               ^~~~~~~
+src/tests/unit-net-help-tests.c:47:47: note: each undeclared identifier is reported only once for each function it appears in
+src/tests/unit-net-help-tests.c:55:36: warning: passing argument 1 of ‘getline’ from incompatible pointer type [-Wincompatible-pointer-types]
+   55 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:645:45: note: expected ‘char ** restrict’ but argument is of type ‘char *’
+  645 | extern __ssize_t getline (char **__restrict __lineptr,
+      |                           ~~~~~~~~~~~~~~~~~~^~~~~~~~~
+src/tests/unit-net-help-tests.c:55:42: warning: passing argument 2 of ‘getline’ makes pointer from integer without a cast [-Wint-conversion]
+   55 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                          ^~~~
+      |                                          |
+      |                                          int
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:646:46: note: expected ‘size_t * restrict’ {aka ‘long unsigned int * restrict’} but argument is of type ‘int’
+  646 |                           size_t *__restrict __n,
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+src/tests/unit-net-help-tests.c:59:42: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   59 |                 if ( inet_pton( AF_INET, cmdout, addr ) == 1 ) {
+      |                                          ^~~~~~
+      |                                          |
+      |                                          FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:61:29: error: expected expression before ‘.’ token
+   61 |                         cur-.ip.ipv4 = addr[ 0 ];
+      |                             ^
+src/tests/unit-net-help-tests.c:62:50: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   62 |                 } else if ( inet_pton( AF_INET6, cmdout, addr ) == 1 ) {
+      |                                                  ^~~~~~
+      |                                                  |
+      |                                                  FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:67:25: warning: implicit declaration of function ‘warn’ [-Wimplicit-function-declaration]
+   67 |                         warn( "invalid addr: '%s'", cmdout );
+      |                         ^~~~
+src/tests/unit-net-help-tests.c:76:15: warning: passing argument 1 of ‘free’ makes pointer from integer without a cast [-Wint-conversion]
+   76 |         free( out );
+      |               ^~~
+      |               |
+      |               char
+In file included from ./src/include/root.h:23,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdlib.h:555:25: note: expected ‘void *’ but argument is of type ‘char’
+  555 | extern void free (void *__ptr) __THROW;
+      |                   ~~~~~~^~~~~
+src/tests/unit-net-help-tests.c: In function ‘main’:
+src/tests/unit-net-help-tests.c:84:17: error: expected expression before ‘struct’
+   84 |         while ( struct ip_list* =
+      |                 ^~~~~~
+src/tests/unit-net-help-tests.c:87:24: warning: missing terminating " character
+   87 |         assert( hname( "www.google.com
+      |                        ^
+src/tests/unit-net-help-tests.c:110:2: error: unterminated argument list invoking macro "assert"
+  110 | }
+      |  ^
+src/tests/unit-net-help-tests.c:84:9: note: ‘-Wmisleading-indentation’ is disabled from this point onwards, since column-tracking was disabled due to the size of the code/headers
+   84 |         while ( struct ip_list* =
+      |         ^~~~~
+src/tests/unit-net-help-tests.c:84:9: note: adding ‘-flarge-source-files’ will allow for more column-tracking support, at the expense of compilation time and memory
+src/tests/unit-net-help-tests.c:87:9: error: expected declaration or statement at end of input
+   87 |         assert( hname( "www.google.com
+      |         ^~~~~~
+src/tests/unit-net-help-tests.c:83:25: warning: unused variable ‘google’ [-Wunused-variable]
+   83 |         struct ip_list* google = get_ip_of( "www.google.com" );
+      |                         ^~~~~~
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:40:1: warning: control reaches end of non-void function [-Wreturn-type]
+   40 | }
+      | ^
+
+Compilation failed
+
+========================================
 	conclusions
 ========================================
 0 test(s) succeeded
@@ -25,6 +334,110 @@ Compilation failed
 
 
 ========================================
+	test unit-net-help-tests.c
+========================================
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:38:61: error: ‘struct sockaddr’ has no member named ‘sin_scope_id’
+   38 |                 printf( "\tsin6_scope_id: %i\n", htons( addy->sin_scope_id ) );
+      |                                                             ^~
+src/tests/unit-net-help-tests.c:13:64: warning: unused parameter ‘oth’ [-Wunused-parameter]
+   13 | int hname_callback ( struct sockaddr* addy, int addylen, void* oth ) {
+      |                                                          ~~~~~~^~~
+src/tests/unit-net-help-tests.c: In function ‘get_ip_of’:
+src/tests/unit-net-help-tests.c:46:20: warning: initialization of ‘char’ from ‘void *’ makes integer from pointer without a cast [-Wint-conversion]
+   46 |         char out = malloc( 2048 );
+      |                    ^~~~~~
+src/tests/unit-net-help-tests.c:49:47: error: ‘ip_list’ undeclared (first use in this function)
+   49 |         struct ip_list* ret = malloc( sizeof( ip_list ) );
+      |                                               ^~~~~~~
+src/tests/unit-net-help-tests.c:49:47: note: each undeclared identifier is reported only once for each function it appears in
+src/tests/unit-net-help-tests.c:57:36: warning: passing argument 1 of ‘getline’ from incompatible pointer type [-Wincompatible-pointer-types]
+   57 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:645:45: note: expected ‘char ** restrict’ but argument is of type ‘char *’
+  645 | extern __ssize_t getline (char **__restrict __lineptr,
+      |                           ~~~~~~~~~~~~~~~~~~^~~~~~~~~
+src/tests/unit-net-help-tests.c:57:42: warning: passing argument 2 of ‘getline’ makes pointer from integer without a cast [-Wint-conversion]
+   57 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                          ^~~~
+      |                                          |
+      |                                          int
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:646:46: note: expected ‘size_t * restrict’ {aka ‘long unsigned int * restrict’} but argument is of type ‘int’
+  646 |                           size_t *__restrict __n,
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+src/tests/unit-net-help-tests.c:61:42: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 if ( inet_pton( AF_INET, cmdout, addr ) == 1 ) {
+      |                                          ^~~~~~
+      |                                          |
+      |                                          FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:63:29: error: expected expression before ‘.’ token
+   63 |                         cur-.ip.ipv4 = addr[ 0 ];
+      |                             ^
+src/tests/unit-net-help-tests.c:64:50: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   64 |                 } else if ( inet_pton( AF_INET6, cmdout, addr ) == 1 ) {
+      |                                                  ^~~~~~
+      |                                                  |
+      |                                                  FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:69:25: warning: implicit declaration of function ‘warn’ [-Wimplicit-function-declaration]
+   69 |                         warn( "invalid addr: '%s'", cmdout );
+      |                         ^~~~
+src/tests/unit-net-help-tests.c:78:15: warning: passing argument 1 of ‘free’ makes pointer from integer without a cast [-Wint-conversion]
+   78 |         free( out );
+      |               ^~~
+      |               |
+      |               char
+In file included from ./src/include/root.h:23,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdlib.h:555:25: note: expected ‘void *’ but argument is of type ‘char’
+  555 | extern void free (void *__ptr) __THROW;
+      |                   ~~~~~~^~~~~
+src/tests/unit-net-help-tests.c: In function ‘main’:
+src/tests/unit-net-help-tests.c:86:17: error: expected expression before ‘struct’
+   86 |         while ( struct ip_list* =
+      |                 ^~~~~~
+src/tests/unit-net-help-tests.c:89:24: warning: missing terminating " character
+   89 |         assert( hname( "www.google.com
+      |                        ^
+src/tests/unit-net-help-tests.c:112:2: error: unterminated argument list invoking macro "assert"
+  112 | }
+      |  ^
+src/tests/unit-net-help-tests.c:86:9: note: ‘-Wmisleading-indentation’ is disabled from this point onwards, since column-tracking was disabled due to the size of the code/headers
+   86 |         while ( struct ip_list* =
+      |         ^~~~~
+src/tests/unit-net-help-tests.c:86:9: note: adding ‘-flarge-source-files’ will allow for more column-tracking support, at the expense of compilation time and memory
+src/tests/unit-net-help-tests.c:89:9: error: expected declaration or statement at end of input
+   89 |         assert( hname( "www.google.com
+      |         ^~~~~~
+src/tests/unit-net-help-tests.c:85:25: warning: unused variable ‘google’ [-Wunused-variable]
+   85 |         struct ip_list* google = get_ip_of( "www.google.com" );
+      |                         ^~~~~~
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:42:1: warning: control reaches end of non-void function [-Wreturn-type]
+   42 | }
+      | ^
+
+Compilation failed
+
+========================================
 	conclusions
 ========================================
 0 test(s) succeeded
@@ -33,6 +446,107 @@ Compilation failed
 
 
 ========================================
+	test unit-net-help-tests.c
+========================================
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:39:61: error: ‘struct sockaddr’ has no member named ‘sin6_scope_id’
+   39 |                 printf( "\tsin6_scope_id: %i\n", htons( addy->sin6_scope_id ) );
+      |                                                             ^~
+src/tests/unit-net-help-tests.c: In function ‘get_ip_of’:
+src/tests/unit-net-help-tests.c:47:20: warning: initialization of ‘char’ from ‘void *’ makes integer from pointer without a cast [-Wint-conversion]
+   47 |         char out = malloc( 2048 );
+      |                    ^~~~~~
+src/tests/unit-net-help-tests.c:50:47: error: ‘ip_list’ undeclared (first use in this function)
+   50 |         struct ip_list* ret = malloc( sizeof( ip_list ) );
+      |                                               ^~~~~~~
+src/tests/unit-net-help-tests.c:50:47: note: each undeclared identifier is reported only once for each function it appears in
+src/tests/unit-net-help-tests.c:58:36: warning: passing argument 1 of ‘getline’ from incompatible pointer type [-Wincompatible-pointer-types]
+   58 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:645:45: note: expected ‘char ** restrict’ but argument is of type ‘char *’
+  645 | extern __ssize_t getline (char **__restrict __lineptr,
+      |                           ~~~~~~~~~~~~~~~~~~^~~~~~~~~
+src/tests/unit-net-help-tests.c:58:42: warning: passing argument 2 of ‘getline’ makes pointer from integer without a cast [-Wint-conversion]
+   58 |         while ( ( error = getline( &out, 2048, cmdout ) ) != 0 ) {
+      |                                          ^~~~
+      |                                          |
+      |                                          int
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:646:46: note: expected ‘size_t * restrict’ {aka ‘long unsigned int * restrict’} but argument is of type ‘int’
+  646 |                           size_t *__restrict __n,
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+src/tests/unit-net-help-tests.c:62:42: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   62 |                 if ( inet_pton( AF_INET, cmdout, addr ) == 1 ) {
+      |                                          ^~~~~~
+      |                                          |
+      |                                          FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:64:29: error: expected expression before ‘.’ token
+   64 |                         cur-.ip.ipv4 = addr[ 0 ];
+      |                             ^
+src/tests/unit-net-help-tests.c:65:50: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   65 |                 } else if ( inet_pton( AF_INET6, cmdout, addr ) == 1 ) {
+      |                                                  ^~~~~~
+      |                                                  |
+      |                                                  FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:70:25: warning: implicit declaration of function ‘warn’ [-Wimplicit-function-declaration]
+   70 |                         warn( "invalid addr: '%s'", cmdout );
+      |                         ^~~~
+src/tests/unit-net-help-tests.c:79:15: warning: passing argument 1 of ‘free’ makes pointer from integer without a cast [-Wint-conversion]
+   79 |         free( out );
+      |               ^~~
+      |               |
+      |               char
+In file included from ./src/include/root.h:23,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdlib.h:555:25: note: expected ‘void *’ but argument is of type ‘char’
+  555 | extern void free (void *__ptr) __THROW;
+      |                   ~~~~~~^~~~~
+src/tests/unit-net-help-tests.c: In function ‘main’:
+src/tests/unit-net-help-tests.c:87:17: error: expected expression before ‘struct’
+   87 |         while ( struct ip_list* =
+      |                 ^~~~~~
+src/tests/unit-net-help-tests.c:90:24: warning: missing terminating " character
+   90 |         assert( hname( "www.google.com
+      |                        ^
+src/tests/unit-net-help-tests.c:113:2: error: unterminated argument list invoking macro "assert"
+  113 | }
+      |  ^
+src/tests/unit-net-help-tests.c:87:9: note: ‘-Wmisleading-indentation’ is disabled from this point onwards, since column-tracking was disabled due to the size of the code/headers
+   87 |         while ( struct ip_list* =
+      |         ^~~~~
+src/tests/unit-net-help-tests.c:87:9: note: adding ‘-flarge-source-files’ will allow for more column-tracking support, at the expense of compilation time and memory
+src/tests/unit-net-help-tests.c:90:9: error: expected declaration or statement at end of input
+   90 |         assert( hname( "www.google.com
+      |         ^~~~~~
+src/tests/unit-net-help-tests.c:86:25: warning: unused variable ‘google’ [-Wunused-variable]
+   86 |         struct ip_list* google = get_ip_of( "www.google.com" );
+      |                         ^~~~~~
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:43:1: warning: control reaches end of non-void function [-Wreturn-type]
+   43 | }
+      | ^
+
+Compilation failed
+
+========================================
 	conclusions
 ========================================
 0 test(s) succeeded
@@ -41,26 +555,86 @@ Compilation failed
 
 
 ========================================
-	conclusions
+	test unit-net-help-tests.c
 ========================================
-0 test(s) succeeded
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:46:39: warning: unused parameter ‘addy’ [-Wunused-parameter]
+   46 | int hname_callback ( struct sockaddr* addy, int addylen, void* oth ) {
+      |                      ~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c: In function ‘get_ip_of’:
+src/tests/unit-net-help-tests.c:63:47: error: ‘ip_list’ undeclared (first use in this function)
+   63 |         struct ip_list* ret = malloc( sizeof( ip_list ) );
+      |                                               ^~~~~~~
+src/tests/unit-net-help-tests.c:63:47: note: each undeclared identifier is reported only once for each function it appears in
+src/tests/unit-net-help-tests.c:71:42: warning: passing argument 2 of ‘getline’ from incompatible pointer type [-Wincompatible-pointer-types]
+   71 |         while ( ( error = getline( &out, &outsize, cmdout ) ) != 0 ) {
+      |                                          ^~~~~~~~
+      |                                          |
+      |                                          int *
+In file included from ./src/include/root.h:22,
+                 from ./src/include/net-internal.h:5,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/stdio.h:646:46: note: expected ‘size_t * restrict’ {aka ‘long unsigned int * restrict’} but argument is of type ‘int *’
+  646 |                           size_t *__restrict __n,
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+src/tests/unit-net-help-tests.c:75:42: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   75 |                 if ( inet_pton( AF_INET, cmdout, addr ) == 1 ) {
+      |                                          ^~~~~~
+      |                                          |
+      |                                          FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:77:29: error: expected expression before ‘.’ token
+   77 |                         cur-.ip.ipv4 = addr[ 0 ];
+      |                             ^
+src/tests/unit-net-help-tests.c:78:50: warning: passing argument 2 of ‘inet_pton’ from incompatible pointer type [-Wincompatible-pointer-types]
+   78 |                 } else if ( inet_pton( AF_INET6, cmdout, addr ) == 1 ) {
+      |                                                  ^~~~~~
+      |                                                  |
+      |                                                  FILE *
+In file included from ./src/include/net-internal.h:26,
+                 from src/tests/unit-net-help-tests.c:2:
+/usr/include/arpa/inet.h:58:56: note: expected ‘const char * restrict’ but argument is of type ‘FILE *’
+   58 | extern int inet_pton (int __af, const char *__restrict __cp,
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+src/tests/unit-net-help-tests.c:83:25: warning: implicit declaration of function ‘warn’ [-Wimplicit-function-declaration]
+   83 |                         warn( "invalid addr: '%s'", cmdout );
+      |                         ^~~~
+src/tests/unit-net-help-tests.c: In function ‘main’:
+src/tests/unit-net-help-tests.c:104:24: warning: missing terminating " character
+  104 |         assert( hname( "www.google.com
+      |                        ^
+src/tests/unit-net-help-tests.c:127:2: error: unterminated argument list invoking macro "assert"
+  127 | }
+      |  ^
+src/tests/unit-net-help-tests.c:104:9: error: ‘assert’ undeclared (first use in this function)
+  104 |         assert( hname( "www.google.com
+      |         ^~~~~~
+src/tests/unit-net-help-tests.c:3:1: note: ‘assert’ is defined in header ‘<assert.h>’; did you forget to ‘#include <assert.h>’?
+    2 | #include "net-internal.h"
+  +++ |+#include <assert.h>
+    3 | 
+src/tests/unit-net-help-tests.c:104:15: error: expected ‘;’ at end of input
+  104 |         assert( hname( "www.google.com
+      |               ^
+      |               ;
+......
+src/tests/unit-net-help-tests.c:100:9: note: ‘-Wmisleading-indentation’ is disabled from this point onwards, since column-tracking was disabled due to the size of the code/headers
+  100 |         for ( struct ip_list* ptr = google; ptr != 0; ptr = ptr->next )
+      |         ^~~
+src/tests/unit-net-help-tests.c:100:9: note: adding ‘-flarge-source-files’ will allow for more column-tracking support, at the expense of compilation time and memory
+src/tests/unit-net-help-tests.c:104:9: error: expected declaration or statement at end of input
+  104 |         assert( hname( "www.google.com
+      |         ^~~~~~
+src/tests/unit-net-help-tests.c: In function ‘hname_callback’:
+src/tests/unit-net-help-tests.c:55:1: warning: control reaches end of non-void function [-Wreturn-type]
+   55 | }
+      | ^
 
-
-
-
-========================================
-	test i_am_a_test.c
-========================================
-I am a test
-I succeed
-Success
-========================================
-	conclusions
-========================================
-1 test(s) succeeded
-
-
-
+Compilation failed
 
 ========================================
 	conclusions
