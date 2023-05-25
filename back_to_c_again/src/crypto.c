@@ -1,8 +1,4 @@
 
 #include "crypto.h"
 
-#include <openssl/evph.>
-
-
-
-int 
+#include <openssl/evp.h>

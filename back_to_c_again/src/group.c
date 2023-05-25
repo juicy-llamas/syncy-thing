@@ -1,5 +1,5 @@
 
-
+#include "group.h"
 
 struct group {
 	unsigned long int flags;
