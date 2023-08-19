@@ -41,15 +41,17 @@ else
 endif
 
 $(APPNAME): $(APP_O)
+	mkdir -p $(BDIR)
 	$(CC) $^ -o $@ $(LFLAGS)
 
 $(BDIR)/%.o: $(SDIR)/%.c
 	$(CC) $^ -o $@ $(CFLAGS)
 
 clean:
-	$(RM) $(BDIR)/*
+	$(RM) -r $(BDIR)
 	$(RM) app
 	$(RM) test_log
+	mkdir $(BDIR)
 
 # ============================================
 # Just a neat little automated testing utility

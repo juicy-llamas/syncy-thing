@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "
+#include <stdio.h>
+#include <openssl/opensslv.h>
+
+int main () {
+	puts( \"Program compiled!\" );
+	puts( OPENSSL_VERSION_TEXT );
+
+	return 0;
+}
+" > temp_test_openssl.c
+gcc -Wall -lcrypto -lssl temp_test_openssl.c -o temp_test_openssl
+./temp_test_openssl
+rm temp_test_openssl.c temp_test_openssl
