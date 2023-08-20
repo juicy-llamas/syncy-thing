@@ -1,15 +1,26 @@
 
 .PHONY: test clean
 
-# are we debugging
+# ======
+# Config
+# ======
+
+# are we debugging (MUST BE EQUAL TO "true" for debugging to work!)
 DEBUG=true
 
+# directories start from makefile directory
 BDIR=build
 SDIR=src
 IDIR=src/include
 TDIR=src/tests
-# entry is the file with main, which is NOT linked with the tests
-ENTRY=main
+# stands for IGNORE_FILES
+# if files are in a directory with this name, just ignore them (don't build or run them)
+# note: include files in directories of this name can still be explicitly included by specifiying the path.
+# also, files on the makefile root directory are just ignored by default, since they aren't in an 'action' directory
+IGNFLS=__ignore__
+# entry is the file with main, again specified from the root of the Makefile to prevent ambiguity
+# it's important because it's NOT linked with the tests
+ENTRY=src/main.c
 APPNAME=app
 
 # you can set your various flags here
@@ -22,13 +33,15 @@ debug_lflags=-g
 build_flags=-fPIE -O3
 build_lflags=-Wl,-z,noexecstack -pie -fPIE
 
-# ==============================================
-# This is where all of the actual make rules are
-# ==============================================
+# =================================================
+# Logic to select the right files and build options
+# =================================================
 
+# this script gets the correct object files while simultaneously making the directory structure
 # assume that every source file is tested, EXCEPT for main b.c. multiple entry point issue
-TEST_O=$(shell for i in $$(find $(SDIR) ! -path "*$(IDIR)*" ! -path "*$(TDIR)*" -type f); \
-	do tmp=$${i#$(SDIR)/}; fl=$${tmp%.c}; [ $$fl = "$(ENTRY)" ] && continue; echo "$(BDIR)/$$fl.o"; done;)
+TEST_O=$(shell for i in $$(find $(SDIR) ! -path "$(IDIR)/*" ! -path "$(TDIR)/*" ! -path "*/$(IGNFLS)/*"	\
+	-type f); do [ $$i = "$(ENTRY)" ] && continue; tmp=$${i#src/}; fl=$${tmp%.c}; pth=$${tmp%/};	\
+	mkdir -p "build/$$pth"; echo "$(BDIR)/$$fl.o"; done;)
 # add main back in. Theoretically, with some changes, you could have multiple targets that use different objects.
 APP_O=$(TEST_O) $(BDIR)/$(ENTRY).o
 
@@ -40,6 +53,10 @@ else
 	LFLAGS=$(build_lflags) $(base_lflags)
 endif
 
+# ==============================================
+# This is where all of the actual make rules are
+# ==============================================
+
 $(APPNAME): $(APP_O)
 	$(CC) $^ -o $@ $(LFLAGS)
 
@@ -47,7 +64,7 @@ $(BDIR)/%.o: $(SDIR)/%.c
 	$(CC) $^ -o $@ $(CFLAGS)
 
 clean:
-	$(RM) $(BDIR)/*
+	$(RM) -r $(BDIR)/*
 	$(RM) app
 	$(RM) test_log
 
@@ -55,19 +72,22 @@ clean:
 # Just a neat little automated testing utility
 # ============================================
 
+# The testing utility will dump results to stdout and to a test_log, which WILL get overwritten
+# for each tests (fairly simple to change this, if anyone wants or cares)
+# Also, to skip tests, just put them in an __ignore__ dir (or whatever name you specified)
 test: $(TEST_O)
 	@num_t=0;										\
 	num_s=0;										\
 	echo "" >> test_log;									\
 	echo "" >> test_log;									\
- 	for i in $$(find $(TDIR) ! -path "*skipped*" -type f); do				\
-		i=$${i#$(TDIR)/};								\
+	mkdir -p "$(BDIR)/$(TDIR)"								\
+ 	for i in $$(find $(TDIR) ! -path "*/$(IGNFLS)/*" -type f); do				\
 		echo "========================================" | tee -a test_log;		\
 		echo "	test $$i" | tee -a test_log;						\
 		echo "========================================" | tee -a test_log;		\
-		$(CC) $(TDIR)/$$i -o $(BDIR)/$${i%%.c}.o $(CFLAGS);				\
+		$(CC) $$i -o $(BDIR)/$${i%%.c}.o $(CFLAGS);					\
 		[ $$? -ne 0 ] &&								\
-			{ $(CC) $(TDIR)/$$i -o $(BDIR)/$${i%%.c}.o $(CFLAGS) >> test_log 2>&1;	\
+			{ $(CC) $$$i -o $(BDIR)/$${i%%.c}.o $(CFLAGS) >> test_log 2>&1;		\
 			  echo "" | tee -a test_log;						\
 			  printf "Compilation failed\n\n" | tee -a test_log; continue; };	\
 		$(CC) $^ $(BDIR)/$${i%%.c}.o -o cur_test $(LFLAGS);				\
