@@ -55,7 +55,7 @@
 				__FILE__, __LINE__, ##__VA_ARGS__ );
 
 	#ifndef NDEBUG
-		#define log_dbgnote( fmt, ... )  								\
+		#define log_debug( fmt, ... )  								\
 			printf( "DEBUG (file %s, line %i): " fmt "\n",				\
 					__FILE__, __LINE__, ##__VA_ARGS__ );
 
@@ -71,13 +71,13 @@
 			printf( "]" );												\
 		})
 	#else
-		#define log_dbg( fmt, ... ) ((void)0)
+		#define log_debug( fmt, ... ) ((void)0)
 		#define printvec( vec, size) ((void)0)
 	#endif
 
 #else
 	#include "logging.h"
-	#define log_dbgnote( fmt, ... ) ((void)0)
+	#define log_debug( fmt, ... ) ((void)0)
 	#define printvec( vec, size ) ((void)0)
 #endif
 
